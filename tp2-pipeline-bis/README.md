@@ -64,6 +64,7 @@ Ce projet implémente un pipeline de production pour l'acquisition, l'enrichisse
 
 ### Cloner le dépôt
 git clone https://github.com/Deep-KALYAN/open-data-ai-models-uv.git
+
 cd tp2-pipeline
 
 #### Installer les dépendances
@@ -73,10 +74,10 @@ uv sync
 
 #### Configuration API (optionnel)
 cp .env.example .env
-# Éditer .env avec vos clés API (Groq, Gemini, etc.)
+### Éditer .env avec vos clés API (Groq, Gemini, etc.)
 
 
-### Dépendances principales
+## Dépendances principales
 httpx : Requêtes HTTP asynchrones
 
 pandas : Manipulation de données
@@ -89,10 +90,10 @@ litellm : Intégration IA multi-fournisseurs
 
 pyarrow : Format Parquet
 
-### 🚀 Utilisation
+## 🚀 Utilisation
 #### Pipeline complet
 
-### Lancer le pipeline complet
+## Lancer le pipeline complet
 uv run python run_pipeline.py --category chocolats --max-items 100
 
 ### Options disponibles
@@ -120,9 +121,9 @@ print(f"Note qualité: {stats['quality_grade']}")
 print(f"Fichier généré: {stats['output_path']}")
 
 
-🧪 Tests
+# 🧪 Tests
 
-### Tests unitaires
+## Tests unitaires
 uv run pytest tests/ -v
 
 ### Avec couverture de code
@@ -143,7 +144,7 @@ Généré le : 2025-12-16 17:45:37
 | Doublons          | 1.2%   | ✅ |
 | Géocodage réussi  | 45.3%  | ⚠️ |
 
-### 🤖 Recommandations IA
+## 🤖 Recommandations IA
 1. Améliorer le géocodage des adresses de magasins
 2. Compléter les valeurs nutritionnelles manquantes
 3. Standardiser les formats de marques
@@ -161,8 +162,9 @@ data/
     └── chocolats_quality_20251216_174557.md  # Rapport qualité
 
 
-
-###    Structure du Projet
+```
+##    Structure du Projet
+```
 
 tp2-pipeline/
 ├── pipeline/                   # Code source
@@ -196,8 +198,8 @@ tp2-pipeline/
 └── README.md                   # Cette documentation
 
 ```
-### Description des modules principaux
-#### pipeline/config.py
+## Description des modules principaux
+### pipeline/config.py
 Configuration centralisée du pipeline :
 
 Chemins des répertoires (data/, raw/, processed/, reports/)
@@ -208,7 +210,7 @@ Seuils de qualité (completeness_min, geocoding_score_min, etc.)
 
 Paramètres d'acquisition (MAX_ITEMS, BATCH_SIZE)
 
-#### pipeline/models.py
+### pipeline/models.py
 Modèles de données avec validation Pydantic :
 
 Product : Modèle d'un produit alimentaire avec validation NutriScore
@@ -217,7 +219,7 @@ GeocodingResult : Résultat de géocodage avec score de confiance
 
 QualityMetrics : Métriques de qualité du dataset avec scoring A-F
 
-#### pipeline/fetchers/
+### pipeline/fetchers/
 Acquisition robuste avec :
 
 BaseFetcher : Classe abstraite avec retry (tenacity), rate limiting, statistiques
@@ -226,7 +228,7 @@ OpenFoodFactsFetcher : Récupération paginée des produits alimentaires
 
 AdresseFetcher : Géocodage d'adresses françaises
 
-#### pipeline/enricher.py
+### pipeline/enricher.py
 Enrichissement croisé des données :
 
 Extraction d'adresses uniques des produits
@@ -237,7 +239,7 @@ Fusion des données géocodées avec les produits originaux
 
 Statistiques d'enrichissement (taux de succès, échecs)
 
-#### pipeline/transformer.py
+### pipeline/transformer.py
 Pipeline de transformation chaînable :
 
 Suppression de doublons
@@ -250,7 +252,7 @@ Filtrage d'outliers (IQR, Z-score)
 
 Colonnes dérivées (catégories de sucre, flags géocodés)
 
-#### pipeline/quality.py
+### pipeline/quality.py
 Analyse et scoring de qualité :
 
 Calcul de métriques (complétude, doublons, géocodage)
@@ -261,7 +263,7 @@ Génération de rapports Markdown automatisés
 
 Intégration IA pour recommandations (Groq, Gemini, Ollama)
 
-#### pipeline/storage.py
+### pipeline/storage.py
 Stockage professionnel :
 
 Sauvegarde JSON brut (traçabilité)
@@ -272,7 +274,7 @@ Partitionnement optionnel par colonne
 
 Chargement et recherche de fichiers
 
-#### pipeline/main.py
+### pipeline/main.py
 Orchestrateur du pipeline :
 
 Gestion des 5 étapes du pipeline
@@ -286,7 +288,7 @@ Interface CLI complète avec argparse
 
 
 
-### 🤖 IA Integration
+## 🤖 IA Integration
 Fonctionnalités IA
 Recommandations de qualité automatisées
 
@@ -308,13 +310,14 @@ Groq (recommandé - rapide et gratuit)
 
 Ollama (local - modèles Mistral, Llama, etc.)
 
-### Configuration
+## Configuration
 ##### .env
 GROQ_API_KEY=gsk_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
-##### Ollama utilise l'API locale par défaut (http://localhost:11434)
+#### Ollama utilise l'API locale par défaut (http://localhost:11434)
 
-### 🔧 Dépendances
+## 🔧 Dépendances
 #### pyproject.toml
+```
 dependencies = [
     "httpx>=0.27.0",        # Requêtes HTTP asynchrones (meilleur que requests)
     "pandas>=2.0.0",        # Manipulation de données (DataFrames)
@@ -326,7 +329,7 @@ dependencies = [
     "python-dotenv>=1.0.0", # Variables d'environnement (.env)
     "duckdb>=0.10.0",       # Analyse SQL sur Parquet (optionnel)
 ]
-
+```
 ### Développement & Tests
 [project.optional-dependencies]
 dev = [
